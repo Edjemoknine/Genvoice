@@ -13,22 +13,26 @@ const ContactDetails = () => {
           <h3 className="font-medium">From (Your Details)</h3>
           <div>
             <Label htmlFor="name">Name</Label>
-            <Input id="name" type="text" />
+            <Input id="name" type="text" placeholder="Your name or company" />
           </div>
           <div>
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" />
+            <Input
+              id="email"
+              type="email"
+              placeholder="Your email or company"
+            />
           </div>
         </div>
         <div className="space-y-4">
           <h3 className="font-medium">To (Client Details)</h3>
           <div>
             <Label htmlFor="name">Name</Label>
-            <Input id="name" type="text" />
+            <Input id="name" type="text" placeholder="Client name" />
           </div>
           <div>
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" />
+            <Input id="email" type="email" placeholder="Client email" />
           </div>
         </div>
       </CardContent>
