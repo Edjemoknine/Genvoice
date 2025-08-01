@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "./ui/button";
 import { Plus } from "lucide-react";
 import InvoiceItem from "./InvoiceItem";
+import { useInvoiceContext } from "@/context/InvoiceContext";
 
 const data = [
   {
@@ -22,6 +23,8 @@ const data = [
 ];
 
 const ItemList = () => {
+  const { invoice } = useInvoiceContext();
+
   const addItem = () => {};
   return (
     <Card>
@@ -33,8 +36,13 @@ const ItemList = () => {
         </Button>
       </CardHeader>
       <CardContent className="space-y-4">
-        {data.map((invoice) => (
-          <InvoiceItem key={invoice.id} invoice={invoice} />
+        {invoice.items.map((item, index) => (
+          <InvoiceItem
+            key={invoice.id}
+            invoice={item}
+            canRemove={invoice.items.length > 1}
+            index={index}
+          />
         ))}
       </CardContent>
     </Card>

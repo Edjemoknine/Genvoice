@@ -2,7 +2,10 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useInvoiceContext } from "@/context/InvoiceContext";
 const ContactDetails = () => {
+  const { invoice, updateInvoice } = useInvoiceContext();
+
   return (
     <Card>
       <CardHeader>
@@ -13,12 +16,20 @@ const ContactDetails = () => {
           <h3 className="font-medium">From (Your Details)</h3>
           <div>
             <Label htmlFor="name">Name</Label>
-            <Input id="name" type="text" placeholder="Your name or company" />
+            <Input
+              id="name"
+              value={invoice.fromName}
+              onChange={(e) => updateInvoice({ fromName: e.target.value })}
+              type="text"
+              placeholder="Your name or company"
+            />
           </div>
           <div>
             <Label htmlFor="email">Email</Label>
             <Input
               id="email"
+              value={invoice.fromEmail}
+              onChange={(e) => updateInvoice({ fromEmail: e.target.value })}
               type="email"
               placeholder="Your email or company"
             />
@@ -28,11 +39,23 @@ const ContactDetails = () => {
           <h3 className="font-medium">To (Client Details)</h3>
           <div>
             <Label htmlFor="name">Name</Label>
-            <Input id="name" type="text" placeholder="Client name" />
+            <Input
+              id="name"
+              value={invoice.toName}
+              onChange={(e) => updateInvoice({ toName: e.target.value })}
+              type="text"
+              placeholder="Client name"
+            />
           </div>
           <div>
             <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="Client email" />
+            <Input
+              id="email"
+              value={invoice.toEmail}
+              onChange={(e) => updateInvoice({ toEmail: e.target.value })}
+              type="email"
+              placeholder="Client email"
+            />
           </div>
         </div>
       </CardContent>
