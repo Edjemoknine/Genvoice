@@ -19,7 +19,7 @@ export type InvoiceData = {
 
   items: Invoice[];
   subtotal: number;
-  taxRate: number;
+  taxRate: number | string;
   taxAmount: number;
   total: number;
 };

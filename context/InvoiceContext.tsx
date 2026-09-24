@@ -6,8 +6,9 @@ import { mockInvoices } from "@/lib/mockData";
 interface InvoiceContextType {
   invoice: InvoiceData;
   updateInvoice: (updates: Partial<InvoiceData>) => void;
-  addItem: (updates: Partial<InvoiceData>) => void;
+  addItem: () => void;
   removeItem: (index: number) => void;
+  updateItem: (index: number, key: string, value: string | number) => void;
 }
 
 const InvoiceContext = createContext<InvoiceContextType | undefined>(undefined);
@@ -35,6 +36,26 @@ export function InvoiceProvider({ children }: { children: ReactNode }) {
       updateInvoice({ items: newItems });
     }
   };
+  const updateItem = (index: number, key: string, value: string | number) => {
+    const newItems = [...invoice.items];
+    newItems[index] = { ...newItems[index], [key]: value };
+    // update the item amount
+    if (key === "quantity" || key === "rate") {
+      let quantity = newItems[index].quantity;
+      let rate = newItems[index].rate;
+
+      if (typeof quantity === "string") {
+        quantity = Number.parseInt(quantity);
+      }
+      if (typeof rate === "string") {
+        rate = Number.parseInt(rate);
+      }
+      const amount = quantity * rate;
+      newItems[index].amount = amount;
+    }
+
+    updateInvoice({ items: newItems });
+  };
   return (
     <InvoiceContext.Provider
       value={{
@@ -42,6 +63,7 @@ export function InvoiceProvider({ children }: { children: ReactNode }) {
         updateInvoice,
         addItem,
         removeItem,
+        updateItem,
       }}
     >
       {children}

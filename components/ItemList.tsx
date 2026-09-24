@@ -5,27 +5,9 @@ import { Plus } from "lucide-react";
 import InvoiceItem from "./InvoiceItem";
 import { useInvoiceContext } from "@/context/InvoiceContext";
 
-const data = [
-  {
-    id: 1,
-    description: "Buy new game",
-    quantity: 1,
-    amount: 50,
-    rate: 120,
-  },
-  {
-    id: 2,
-    description: "Buy new book",
-    quantity: 1,
-    amount: 120,
-    rate: 120,
-  },
-];
-
 const ItemList = () => {
-  const { invoice } = useInvoiceContext();
+  const { invoice, addItem } = useInvoiceContext();
 
-  const addItem = () => {};
   return (
     <Card>
       <CardHeader className="flex justify-between items-center flex-row">
